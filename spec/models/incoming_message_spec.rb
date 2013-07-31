@@ -21,6 +21,26 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+describe IncomingMessage, 'when validating' do
+
+    it 'should be valid with valid prominence values' do
+        ['hidden', 'requester_only', 'normal'].each do |prominence|
+            incoming_message = IncomingMessage.new(:raw_email => RawEmail.new,
+                                                   :info_request => InfoRequest.new,
+                                                   :prominence => prominence)
+            incoming_message.valid?.should be_true
+        end
+    end
+
+    it 'should not be valid with an invalid prominence value' do
+        incoming_message = IncomingMessage.new(:raw_email => RawEmail.new,
+                                               :info_request => InfoRequest.new,
+                                               :prominence => 'norman')
+        incoming_message.valid?.should be_false
+    end
+
+end
+
 describe IncomingMessage, " when dealing with incoming mail" do
 
     before(:each) do
