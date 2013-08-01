@@ -17,6 +17,7 @@
 #  last_parsed                    :datetime
 #  mail_from                      :text
 #  sent_at                        :datetime
+#  prominence                     :string(255)      default("normal"), not null
 #
 
 # models/incoming_message.rb:
